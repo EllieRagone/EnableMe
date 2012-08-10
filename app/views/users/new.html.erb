@@ -1,0 +1,10 @@
+<% provide(:title, "Sign up") %>
+<h1>Sign up</h1>
+<div class="row">
+  <div class="span4 offset2 signup">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/signup_form', f: f %>
+      <%= f.submit "Sign up", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
