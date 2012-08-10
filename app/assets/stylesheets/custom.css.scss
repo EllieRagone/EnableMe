@@ -1,0 +1,146 @@
+/* google web-fonts */
+@import url(http://fonts.googleapis.com/css?family=Quando|Nunito:300,700);
+
+/* variables  */
+$grayDarkest:   #222222;
+$grayDarker:    #223322;
+$grayDark:      #555544;
+$grayLight:     #bbbbaa;
+
+$brownDark:     #777744;
+$brownMed:      #aa9966;
+$brownLight:    #ccbb77;
+
+$blueVibrant:   #eeeedd;
+$orangeDull:    #887755;
+$orangeVibrant: #cc9944;
+
+
+/* bootstrap variable overrides */
+$navbarBackground: $brownDark;
+$navbarBackgroundHighlight: $brownMed;
+
+$navbarText: $blueVibrant;
+$navbarBrandColor: $orangeVibrant;
+$navbarLinkColor: $grayDark;
+$navbarLinkColorHover: $brownDark;
+$navbarLinkColorActive: #fff;
+$navbarLinkBackgroundActive: $blueVibrant;
+
+/*
+$navbarSearchBackground: 
+$navbarSearchBackgroundFocus:
+$navbarSearchBorder:
+$navbarSearchPlaceholderColor:
+*/
+
+$textColor_maybe: #888888;
+$textColor_maybegraylight:  $grayLight;
+$textColor: $blueVibrant;
+
+
+
+/* imports */
+
+@import 'bootstrap';
+
+
+/* mixins */
+
+
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+  background: url('class_fabric.png');
+  font-family: 'Nunito', sans-serif;
+  font-weight: 300;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 2.5em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: $grayLight;
+  font-family: 'Quando', serif;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* body */
+
+.description {
+  margin-bottom: 30px;
+  h2 {
+    text-align: left;
+    color: #d8d8d8;
+    margin-bottom: 10px;
+  }
+  ul {
+    list-style: none;
+    li {
+      font-size: 1.1em;
+      line-height: 1.4em;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.steam_warning {
+  font-size: 0.8em;
+  color: #989898;
+  a {
+    color: #c8c8c8;
+  }
+}
