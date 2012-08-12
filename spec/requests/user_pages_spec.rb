@@ -51,15 +51,104 @@ describe "UserPages" do
           it { should have_link('Sign out') }
         end
       end
+
+      describe "when already signed in" do
+        let(:user) { FactoryGirl.create(:user) }
+        before { sign_in user }
+
+        describe "visiting the Users#new page" do
+          before { visit signup_path }
+          it { should_not have_selector('title', text: 'Sign up') }
+        end
+
+        describe "submitting a POST request to the Users#create action" do
+          before { post users_path }
+          specify { response.should redirect_to(root_path) }
+        end
+      end
     end
   end
 
   describe "profile page" do
     let(:user) {FactoryGirl.create(:user) }
-    before { visit user_path(user) }
+    before do
+      sign_in user
+      visit user_path(user)
+    end
 
     it { should have_selector('h1', text: user.steam_name) }
     it { should have_selector('title', text: full_title(user.steam_name)) }
   end
 
+  describe "edit profile" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
+
+    describe "page" do
+      it { should have_selector('h1', text: "Update your profile") }
+      it { should have_selector('title', text: full_title("Edit Profile")) }
+    end
+
+    describe "with invalid information" do
+      before {click_button "Save changes" }
+
+      it { should have_content('error') }
+    end
+
+    describe "with valid information" do
+      let(:new_steam_name) { "New Name" }
+      let(:new_email) { "new@example.com" }
+      before do
+        fill_in "Steam User Name", with: new_steam_name
+        fill_in "Email", with: new_email
+        fill_in "Password", with: user.password
+        fill_in "Confirm Password", with: user.password
+        click_button "Save changes"
+      end
+
+      it { should have_selector('title', text: new_steam_name) }
+      it { should have_selector('div.alert.alert-success') }
+      it { should have_link('Sign out', href: signout_path) }
+      specify { user.reload.steam_name.should == new_steam_name }
+      specify { user.reload.email.should == new_email }
+    end
+  end
+
+  describe "index" do
+    before(:all) { 40.times { FactoryGirl.create(:user) } }
+    after(:all) { User.delete_all }
+
+    describe "as admin user" do
+      let(:admin) { FactoryGirl.create(:admin) }
+      before do 
+        sign_in admin
+        visit users_path
+      end
+
+      it { should have_selector('title', text: 'All users') }
+      it { should have_selector('h1', text: 'All users') }
+
+      describe "pagination" do
+
+        it { should have_selector('div.pagination') }
+
+        it "should list each user" do
+          User.paginate(page: 1).each do |user|
+            page.should have_selector('li', text: user.steam_name)
+          end
+        end
+      end
+
+      describe 'delete links' do
+        it { should have_link('delete', href: user_path(User.first)) }
+        it "should be able to delete another user" do
+          expect { click_link('delete') }.to change(User, :count).by(-1)
+        end
+        it { should_not have_link('delete', href: user_path(admin)) }
+      end
+    end
+  end
 end

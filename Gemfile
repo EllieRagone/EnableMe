@@ -5,6 +5,7 @@ gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'pg'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'bootstrap-will_paginate'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -14,7 +15,9 @@ group :development, :test do
   gem 'guard-rspec', '0.5.5'
 end
 
-gem 'annotate', '2.5.0', group: :development
+group :development do
+  gem 'annotate', '2.5.0'
+end
 
 
 # Gems used only for assets and not required
