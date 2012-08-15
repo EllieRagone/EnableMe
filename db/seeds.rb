@@ -18,3 +18,4 @@ open("seedfile.txt") do |users|
 end
 
 User.first.toggle!(:admin)
+User.all.each { |u| u.save(validate: false) }

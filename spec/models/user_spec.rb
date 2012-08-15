@@ -2,21 +2,32 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  steam_name      :string(255)
-#  email           :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean          default(FALSE)
+#  id               :integer          not null, primary key
+#  steam_name       :string(255)
+#  email            :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  password_digest  :string(255)
+#  remember_token   :string(255)
+#  admin            :boolean          default(FALSE)
+#  steam_games      :text
+#  steam_id         :string(255)
+#  privacy_state    :string(255)
+#  avatar_icon      :string(255)
+#  avatar_medium    :string(255)
+#  avatar_full      :string(255)
+#  custom_url       :string(255)
+#  steam_rating     :float
+#  hours_played_2wk :float
+#  real_name        :string(255)
+#  steam_id_64      :string(255)
 #
 
 require 'spec_helper'
 
 describe User do
   before do 
-    @user = User.new(steam_name: "example", 
+    @user = User.new(steam_name: "rafer32", 
                      email: "user@example.com",
                      password: "foobar", 
                      password_confirmation: "foobar")
@@ -34,6 +45,17 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
+  it { should respond_to(:steam_id) }
+  it { should respond_to(:privacy_state) }
+  it { should respond_to(:avatar_icon) }
+  it { should respond_to(:avatar_medium) }
+  it { should respond_to(:avatar_full) }
+  it { should respond_to(:custom_url) }
+  it { should respond_to(:steam_rating) }
+  it { should respond_to(:hours_played_2wk) }
+  it { should respond_to(:real_name) }
+  it { should respond_to(:steam_id_64) }
+  it { should respond_to(:steam_games) }
 
   describe "when steam_name is not present" do
     before { @user.steam_name = " " }
@@ -123,5 +145,27 @@ describe User do
     end
 
     it { should be_admin }
+  end
+
+  describe "steam profile fields" do
+    before { @user.save }
+    its(:steam_id) { should_not be_blank }
+    its(:privacy_state) { should_not be_blank }
+    its(:avatar_icon) { should_not be_blank }
+    its(:avatar_medium) { should_not be_blank }
+    its(:avatar_full) { should_not be_blank }
+    its(:custom_url) { should_not be_blank }
+    its(:steam_rating) { should_not be_blank }
+    its(:hours_played_2wk) { should_not be_blank }
+    its(:real_name) { should_not be_blank }
+
+    its(:steam_rating) { should be_a(Float) }
+    its(:hours_played_2wk) { should be_a(Float) }
+  end
+
+  describe "steam_games" do
+    before { @user.save }
+    its(:steam_games) { should_not be_blank }
+    its(:steam_games) { should be_a(Hash) }
   end
 end

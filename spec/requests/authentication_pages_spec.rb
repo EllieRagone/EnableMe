@@ -108,5 +108,16 @@ describe "AuthenticationPages" do
         specify { response.should redirect_to(root_path) }
       end
     end
+
+    describe "as admin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:admin) { FactoryGirl.create(:admin) }
+      before { sign_in admin }
+
+      describe "visiting another users User#show page" do
+        before { visit user_path(user) }
+        it { should have_selector('title', text: user.steam_name) }
+      end
+    end
   end
 end

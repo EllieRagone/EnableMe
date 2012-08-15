@@ -103,6 +103,7 @@ h2 {
   font-size: 1.7em;
   letter-spacing: -1px;
   margin-bottom: 10px;
+  padding-top: 10px;
   text-align: center;
   font-weight: normal;
 }
@@ -164,6 +165,34 @@ p {
 
 .row {
   margin-top: 10px;
+}
+
+.heading_top {
+  float: left;
+  position: relative;
+  left: 50%;
+  height: 100px;
+  .heading_bottom {
+    float:  left;
+    position: relative;
+    left: -50%;
+    h1 {
+      display: inline-block;
+      margin-left: 15px;
+      margin-top: 30px;
+    }
+  }
+}
+
+.side_scrolling {
+  margin-top: 15px;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  a + a {
+    margin-left: 10px;
+  }
 }
 
 /* forms */

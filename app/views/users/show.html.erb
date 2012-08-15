@@ -1,17 +1,23 @@
 <% provide(:title, @user.steam_name) %>
-<div class="row steam_name">
-  <div class="span8 offset2">
-    <h1><%= @user.steam_name %></h1>
+<div class="row-fluid">
+  <div class="heading_top">
+    <div class="heading_bottom">
+      <img src=<%= @user.avatar_medium %>><h1><%= @user.steam_name %></h1>
+    </div>
   </div>
 </div>
-<div class="row border_bottom">
+<div class="row-fluid border_bottom">
   <h2>Rates Games you've played</h2>
 </div>
-<div class="row border_bottom">
-  <p>placeholder for game library side-scrolling content </p>
+<div class="row-fluid border_bottom side_scrolling">
+  <% @user.steam_games.each do |key, game_hash | %>
+    <% if game_hash['hoursOnRecord'].to_i > 1 %>
+      <a href=<%= game_hash['storeLink'] %> title=<%= game_hash['name'] %>><img src=<%= game_hash['logo'] %>></a>
+    <% end %>
+  <% end %>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
     <h2>Our Recommendations</h2>
     <h4>Top Rated</h4>
@@ -22,7 +28,7 @@
     <p>placeholder</p>
   </div>
   <div class="span5 offset1">
-    <h3>Stats on your Steam Games Library</h3>
+    <h2>Stats on your Steam Games Library</h2>
     <p>placeholder</p>
   </div>
 </div>
