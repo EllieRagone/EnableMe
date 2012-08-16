@@ -10,7 +10,9 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
+//= require extensions/jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
+//= require_tree ./extensions
+//= require init.js
+//= require_tree ./users

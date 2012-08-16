@@ -1,0 +1,1 @@
+window.ENABLEME.common.init = ->
